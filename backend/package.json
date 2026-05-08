@@ -1,10 +1,27 @@
 {
-  "name": "PáginaConLogging",
+  "name": "read-books",
   "version": "1.0.0",
+  "private": true,
   "description": "",
-  "main": "../frontend/assets/js/script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage": "https://github.com/Sromerop0610/Despliegue-de-aplicaci-n-web-con-Docker#readme",
+  "bugs": {
+    "url": "https://github.com/Sromerop0610/Despliegue-de-aplicaci-n-web-con-Docker/issues"
   },
-  "private": true
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sromerop0610/Despliegue-de-aplicaci-n-web-con-Docker.git"
+  },
+  "license": "ISC",
+  "author": "Sara Romero",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.3"
+  }
 }
