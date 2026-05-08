@@ -9,7 +9,7 @@ app.use(express.json());
 
 // CONEXIÓN A MYSQL (de momento simple)
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "db",
     user: "root",
     password: "",
     database: "readbooks"
@@ -55,24 +55,24 @@ app.post("/login", (req, res) => {
     db.query(sql, [usuario], (err, results) => {
 
         if (err) {
-            return res.status(500).send("Error");
+            return res.status(500).json({ ok: false });
         }
 
         if (results.length === 0) {
-            return res.status(401).send("Usuario no existe");
+            return res.status(401).json({ ok: false });
         }
 
         const user = results[0];
 
         if (user.password !== password) {
-            return res.status(401).send("Contraseña incorrecta");
+            return res.status(401).json({ ok: false });
         }
 
-        res.send("Login correcto");
+        res.status(200).json({ ok: true });
     });
 });
 
 // ARRANCAR SERVIDOR
-app.listen(3000, () => {
+app.listen(3000, "0.0.0.0",() => {
     console.log("Servidor en http://localhost:3000");
 });
