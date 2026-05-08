@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!form) return;
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const usuarioInput = document.getElementById("usuario");
@@ -13,26 +13,36 @@ document.addEventListener("DOMContentLoaded", () => {
         const usuario = usuarioInput.value;
         const password = passwordInput.value;
 
-        const usuarioCorrecto = "usuario1";
-        const passwordCorrecta = "contraseña";
-
-        // Quitar errores previos
+        // limpiar errores visuales
         usuarioInput.classList.remove("error");
         passwordInput.classList.remove("error");
 
-        if (usuario === usuarioCorrecto && password === passwordCorrecta) {
-            window.location.href = "libro.html";
-        } else {
-            // Marcar campos incorrectos
-            if (usuario !== usuarioCorrecto) {
+        try {
+            const response = await fetch("http://localhost:3000/login", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    usuario,
+                    password
+                })
+            });
+
+            if (response.ok) {
+                window.location.href = "libro.html";
+            } else {
                 usuarioInput.classList.add("error");
-            }
-
-            if (password !== passwordCorrecta) {
                 passwordInput.classList.add("error");
+                alert("Usuario o contraseña incorrectos");
             }
 
-            alert("Usuario o contraseña incorrectos");
+        } catch (error) {
+            alert("Error de conexión con el servidor");
+            console.log(error);
         }
     });
 
