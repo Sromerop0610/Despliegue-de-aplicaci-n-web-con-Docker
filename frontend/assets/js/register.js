@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("registerForm");
 
-    if (!form) return;
-
     form.addEventListener("submit", async (e) => {
 
         e.preventDefault();
@@ -11,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const usuario = document.getElementById("usuario").value;
         const password = document.getElementById("password").value;
 
+        // VALIDACIÓN DE CONTRASEÑA
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
 
         if (!passwordRegex.test(password)) {
@@ -19,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("https://localhost:3000/register", {
+            const response = await fetch("http://localhost:3000/register", {
 
                 method: "POST",
 
@@ -41,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         } catch (error) {
-            alert("Error de conexión con el servidor");
             console.log(error);
+            alert("Error de conexión con el servidor");
         }
 
     });
