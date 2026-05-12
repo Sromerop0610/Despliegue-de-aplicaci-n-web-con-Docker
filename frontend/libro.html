@@ -50,12 +50,20 @@
 
             <!-- BOTÓN -->
             <a href="#" class="boton secundario leer_btn">Leer libro</a>
-
+            <button id="logoutBtn" class="boton secundario">
+                Cerrar sesión
+            </button>
         </div>
 
     </section>
 
 </main>
+<script>
+    const usuario = localStorage.getItem("usuario");
 
+    if (!usuario) {
+        window.location.href = "login.html";
+    }
+</script>
 </body>
 </html>
